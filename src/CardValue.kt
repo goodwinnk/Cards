@@ -1,3 +1,5 @@
+package cards
+
 public enum class CardValue(val number : Int) {
     N7 : CardValue(0)
     N8 : CardValue(1)
@@ -8,18 +10,15 @@ public enum class CardValue(val number : Int) {
     King : CardValue(6)
     Ace : CardValue(7)
 
-    public fun toString() : String {
+    public fun toString() : String =
         when (this) {
-            N7 -> return "7"
-            N8 -> return "8"
-            N9 -> return "9"
-            N10 -> return "10"
-            Jack -> return "J"
-            Queen -> return "Q"
-            King -> return "K"
-            Ace -> return "A"
+            N7 -> "7"
+            N8 -> "8"
+            N9 -> "9"
+            N10 -> "10"
+            Jack -> "J"
+            Queen -> "Q"
+            King -> "K"
+            Ace -> "A"
         }
-
-        return ""
-    }
 }

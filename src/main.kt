@@ -1,12 +1,15 @@
+package cards
+
 import java.util.ArrayList
-import CardValue as V
-import Suit as S
+import cards.CardValue as V
+import cards.Suit as S
 import javax.smartcardio.Card
 import java.util.Set
 import java.util.Map
 import java.util.HashSet
 import java.util.HashMap
 import java.util.Arrays
+import java.util.List
 
 class Card(val suit : Suit, val value : CardValue) {
     public fun toString() : String {
@@ -39,10 +42,21 @@ class Player(spades : Array<Card>, clubs : Array<Card>, diamonds : Array<Card>, 
     }
 }
 
-enum class PlayerId {
-    Main
-    Left
-    Right
+enum class PlayerId(private val id : Int) {
+    Main : PlayerId(0)
+    Left : PlayerId(1)
+    Right : PlayerId(2)
+
+    fun shift(number : Int) : PlayerId {
+        return PlayerId((this.id + number) % 3)
+    }
+
+    fun toString() = when (this) {
+        Main -> "Main"
+        Left -> "Left"
+        Right -> "Right"
+        else -> "Error"
+    }
 }
 
 class PlayerState(val suitSets : Array<Array<Byte>>) {
@@ -66,19 +80,17 @@ class PlayerState(val suitSets : Array<Array<Byte>>) {
     }
 }
 
-class OneRound(val mainCard: Card, val secondCard : Card, val thirdCard : Card,
-               val moveBy : PlayerId, val trickBy : PlayerId)
-
 class StateDecision(val tricksByMain : Int, val tricksByWhistBidders : Int, val bestMoves : Set<Card>)
 
-class GameState(val moveNumber : Int, val moveBy : PlayerId, val main : PlayerState, val left : PlayerState, val right : PlayerState) {
+class GameState(val moveNumber : Int, val moveBy : PlayerId,
+                val main : PlayerState, val left : PlayerState, val right : PlayerState) {
     val activePlayerState = when (moveBy) {
         PlayerId.Main -> main
         PlayerId.Left -> left
         PlayerId.Right -> right
     }
 
-    val isFirstMove : Boolean = moveNumber % 3 == 0
+    val isNewRound : Boolean = moveNumber % 3 == 0
 
     public fun hashCode() : Int {
         return 0
@@ -101,7 +113,7 @@ class OrdinalGameSolver(initState : GameState, trump : Suit) {
 
     fun doMove() {
         val activePlayerState = currentState.activePlayerState
-        if (currentState.isFirstMove) {
+        if (currentState.isNewRound) {
 
         }
     }
@@ -126,4 +138,12 @@ fun main(args : Array<String>) {
             clubs(V.Queen, V.King, V.Ace),
             diamonds(V.N7, V.Jack, V.Queen, V.Ace),
             hearts()))
+
+    val roundState = cards.RoundState(spade(V.Ace), PlayerId.Main)
+    roundState.addCard(heart(V.N7))
+    roundState.addCard(spade(V.N10))
+
+    println(roundState.trickBy(Suit.Hearts))
+
+    println(PlayerId.Main.shift(1))
 }

@@ -1,3 +1,5 @@
+package cards
+
 enum class Suit {
     Spades
     Clubs
