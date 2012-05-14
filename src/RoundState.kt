@@ -30,10 +30,11 @@ class RoundState(val firstCard : Card, val moveBy : PlayerId) {
         }
 
         if (all.any({it.suit == trump})) {
-            return moveBy.shift(bustIndexWithSuit(trump, all))
+            return moveBy
+            // return moveBy.shift(bustIndexWithSuit(trump, all))
         }
-
-        return moveBy.shift(bustIndexWithSuit(firstCard.suit, all))
+        return moveBy
+        // return moveBy.shift(bustIndexWithSuit(firstCard.suit, all))
     }
 
     private fun bustIndexWithSuit(suit : Suit, cards : List<Card>) : Int {

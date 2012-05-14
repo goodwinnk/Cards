@@ -42,24 +42,7 @@ class Player(spades : Array<Card>, clubs : Array<Card>, diamonds : Array<Card>, 
     }
 }
 
-enum class PlayerId(private val id : Int) {
-    Main : PlayerId(0)
-    Left : PlayerId(1)
-    Right : PlayerId(2)
-
-    fun shift(number : Int) : PlayerId {
-        return PlayerId((this.id + number) % 3)
-    }
-
-    fun toString() = when (this) {
-        Main -> "Main"
-        Left -> "Left"
-        Right -> "Right"
-        else -> "Error"
-    }
-}
-
-class PlayerState(val suitSets : Array<Array<Byte>>) {
+class PlayerState(val suitSets : Array<Array<Boolean>>) {
     fun suitIndex(suit : Suit) : Int = when (suit) {
         Suit.Spades -> 0
         Suit.Clubs -> 1
@@ -68,11 +51,36 @@ class PlayerState(val suitSets : Array<Array<Byte>>) {
     }
 
     fun makeMove(card : Card) : PlayerState {
-//        val suitSetCopy : Array<Byte> = Arrays.copyOf(suitSets[suitIndex(card.suit)], 8)
-//        suitSetCopy.set(card.value.number, 0)
-//
-//        val suitSets = array(suitSets)
-         return this
+        val index = suitIndex(card.suit)
+        val suitPartCopy : Array<Boolean> = suitSets[index].copyOf(suitSets[index].size)
+
+        if (!suitPartCopy[card.value.number]) {
+            throw IllegalStateException()
+        }
+
+        suitPartCopy[card.value.number] = false
+
+        val newState : Array<Array<Boolean>> = suitSets.copyOf(suitSets.size)
+        newState[index] = suitPartCopy
+        return PlayerState(newState)
+    }
+
+    public fun toString() : String {
+        val builder = StringBuilder()
+        fun printSuit(suitCards : Array<Boolean>, suit : Suit) {
+            suitCards.indices.forEach {
+                if (suitCards[it]) {
+                    builder.append(Card(suit, cardValue(it)).toString())
+                }
+            }
+        }
+
+        printSuit(suitSets[suitIndex(Suit.Spades)], Suit.Spades)
+        printSuit(suitSets[suitIndex(Suit.Clubs)], Suit.Clubs)
+        printSuit(suitSets[suitIndex(Suit.Diamonds)], Suit.Diamonds)
+        printSuit(suitSets[suitIndex(Suit.Hearts)], Suit.Hearts)
+
+        return builder.toString()!!
     }
 
     public fun hashCode() : Int {
@@ -108,6 +116,11 @@ class OrdinalGameSolver(initState : GameState, trump : Suit) {
     private val storedDecisions = HashMap<GameState, StateDecision>
 
     fun solve() : Int {
+
+        val test = array(12, 13, 14)
+        test.forEach {
+            println(it)
+        }
         return 0
     }
 
@@ -144,6 +157,13 @@ fun main(args : Array<String>) {
     roundState.addCard(spade(V.N10))
 
     println(roundState.trickBy(Suit.Hearts))
+    println(shift(PlayerId.Main, 1))
+    println(shift(PlayerId.Main, 2))
 
-    println(PlayerId.Main.shift(1))
+    val sp = array(true, false, false, false, true, false, false, false)
+    val cl = array(false, true, false, false, false, true, false, false)
+    val d = array(false, false, true, false, false, false, true, false)
+    val h = array(false, false, false, true, false, false, false, true)
+    println(PlayerState(array(sp, cl, d, h)))
+
 }
