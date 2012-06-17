@@ -30,5 +30,6 @@ fun shift(playerId : PlayerId, var shiftTo : Int) : PlayerId {
         PlayerId.Right -> return if (shiftTo == 1) PlayerId.Main else PlayerId.Left
     }
 
+    // doesn't work
     throw IllegalStateException()
 }
