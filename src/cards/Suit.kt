@@ -1,10 +1,10 @@
 package cards
 
-enum class Suit {
-    Spades
-    Clubs
-    Diamonds
-    Hearts
+public enum class Suit(public val index : Int) {
+    Spades : Suit(0)
+    Clubs : Suit(1)
+    Diamonds : Suit(2)
+    Hearts : Suit(3)
 
     public fun toString() : String {
         when (this) {
@@ -14,6 +14,6 @@ enum class Suit {
             Hearts -> return "♥"
         }
 
-        return ""
+        throw IllegalStateException("Invalid suit")
     }
 }
