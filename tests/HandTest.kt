@@ -10,7 +10,20 @@ import cards.initHand
 
 public class HandTest() {
     Test fun handToString() {
-        Assert.assertEquals("Hand: K♣ 7♠ ", initHand(arrayList(card(Clubs, King), card(Spades, Seven))).toString())
+        Assert.assertEquals("Hand: 7♠ K♣ ", initHand(arrayList(card(Clubs, King), card(Spades, Seven))).toString())
+    }
+
+    Test fun handToStringSort() {
+        Assert.assertEquals("Hand: 10♠ J♠ 9♣ Q♣ 8♦ K♦ 7♥ A♥ ", initHand(arrayList(
+                card(Hearts, Ace),
+                card(Diamonds, King),
+                card(Clubs, Queen),
+                card(Spades, Jack),
+                card(Spades, Ten),
+                card(Clubs, Nine),
+                card(Diamonds, Eight),
+                card(Hearts, Seven)
+        )).toString())
     }
 
     Test fun removeCard() {

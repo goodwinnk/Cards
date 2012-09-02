@@ -29,10 +29,10 @@ public fun initHand(cards: List<Card>) : Hand {
 
         fun compareCards(card1: Card, card2: Card): Int {
             if (card1.suit.index == card2.suit.index) {
-                return card2.value.number - card1.value.number
+                return card1.value.number - card2.value.number
             }
 
-            return card2.suit.index - card1.suit.index
+            return card1.suit.index - card2.suit.index
         }
     })
 
