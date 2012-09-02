@@ -78,7 +78,7 @@ public class Hand public(val cards: List<Card>, val suitCards: List<out List<Car
         if (!hashCodeReady) {
             hashCodeCache = 17
             for (card : Card in cards) {
-                hashCodeCache = 31 * hashCodeCache + card.javaClass.hashCode()
+                hashCodeCache = 31 * hashCodeCache + (card as Object).hashCode()
             }
             hashCodeReady = true
         }
