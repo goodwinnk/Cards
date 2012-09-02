@@ -62,7 +62,7 @@ public open class NormalGameState(
 ) {
     public fun numOfTricksWithTrump(trumpSuit: Suit?, declarerIndex: Int): Int {
         // Temp progress print
-        if (hands.get(0).cards.size() == 7) {
+        if (hands.get(0).cards.size() == 9) {
             println(this)
         }
 
