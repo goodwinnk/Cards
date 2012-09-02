@@ -14,6 +14,10 @@ private fun <T>initArrayList(size : Int, initFun : (Int) -> T) : ArrayList<T> {
     return arrayList
 }
 
+public fun initHand(vararg cards : Card) : Hand {
+    return initHand(cards.toList())
+}
+
 // Move to class object
 public fun initHand(cards: List<Card>) : Hand {
     // Sort cards
@@ -83,7 +87,7 @@ public class Hand public(val cards: List<Card>, val suitCards: List<out List<Car
     }
 
     public fun equals(obj: Any?): Boolean {
-        if (obj == null || !(obj is Hand)) {
+        if (!(obj is Hand)) {
             return false
         }
 

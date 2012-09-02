@@ -70,6 +70,15 @@ public class RoundState(val cards : List<Card>, public val firstMoveSuit : Suit?
         return true
     }
 
+    fun toString() : String {
+        val builder = StringBuilder("RoundState: ")
+        for (card in cards) {
+            builder.append(card)!!.append(" ")
+        }
+
+        return builder.toString()!!
+    }
+
     class object {
         public open fun compare(first : Card, second : Card, trumpSuit : Suit?) : Int {
             if (first.suit == second.suit) {
