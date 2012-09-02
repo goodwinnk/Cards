@@ -5,6 +5,6 @@ import org.junit.runners.Suite
 import org.junit.runners.Suite.SuiteClasses
 
 [RunWith(javaClass<Suite>())]
-[SuiteClasses(javaClass<CardTest>(), javaClass<HandTest>())]
+[SuiteClasses(javaClass<CardTest>(), javaClass<HandTest>(), javaClass<RoundStateTest>())]
 class AllTests {
 }
