@@ -1,8 +1,6 @@
 package cards
 
-import java.util.List
 import java.util.ArrayList
-import java.util.Collection
 import java.util.Collections
 
 fun initRoundState() : RoundState = RoundState(Collections.emptyList<Card>()!!, null)
@@ -28,7 +26,7 @@ public class RoundState(val cards : List<Card>, public val firstMoveSuit : Suit?
 
         var winnerIndex : Int = 0
         for (i in 0..cards.size() - 1) {
-            if ((compare(cards.get(winnerIndex), cards.get(i), trump)).sure() < 0) {
+            if ((compare(cards.get(winnerIndex), cards.get(i), trump)) < 0) {
                 winnerIndex = i
             }
 

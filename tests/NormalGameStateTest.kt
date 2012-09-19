@@ -11,9 +11,7 @@ import org.junit.Assert
 import cards.RoundState
 import cards.NormalGameState
 import java.util.Arrays
-import java.util.List
 import cards.initRoundState
-import java.util.Collection
 import cards.Card
 import cards.initNormalGameState
 import cards.getPossibleMoves

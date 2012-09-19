@@ -1,9 +1,7 @@
 package cards
 
-import java.util.List
-import java.util.HashMap
-import java.util.Collection
 import java.util.ArrayList
+import java.util.HashMap
 
 fun initNormalGameState(
         hands: List<Hand>,
@@ -90,7 +88,6 @@ public open class NormalGameState(
 
                 if (newHand.isEmpty()) {
                     // New active player can't do a move - The game is finished
-                    // println("Final for ${this} = ${roundTrickNumber}")
                     return roundTrickNumber
                 }
 
@@ -105,10 +102,8 @@ public open class NormalGameState(
             if (newGameState.roundState.isEmpty) {
                 if (statesCache.containsKey(newGameState)) {
                     stateTricks = statesCache.get(newGameState)!!
-                    // println("CACHE ====>>>> for ${newGameState} = ${stateTricks}")
                 } else {
                     stateTricks = newGameState.numOfTricksWithTrump(trumpSuit, declarerIndex)
-                    // println("CACHE <<<<==== for ${newGameState} = ${stateTricks}")
                     statesCache.put(newGameState, stateTricks)
                 }
             } else {
@@ -118,9 +113,6 @@ public open class NormalGameState(
             val tricks: Int = stateTricks + roundTrickNumber
             trickResult = if (activePlayerIndex == declarerIndex) Math.max(trickResult, tricks) else Math.min(trickResult, tricks)
         }
-
-        // println("Final for ${this} = ${trickResult}")
-
         return trickResult
     }
 

@@ -1,8 +1,6 @@
 package cards
 
-import java.util.List
 import java.util.ArrayList
-import java.util.Collection
 import java.util.Comparator
 
 private fun <T>initArrayList(size : Int, initFun : (Int) -> T) : ArrayList<T> {
@@ -78,7 +76,7 @@ public class Hand public(val cards: List<Card>, val suitCards: List<out List<Car
         if (!hashCodeReady) {
             hashCodeCache = 17
             for (card : Card in cards) {
-                hashCodeCache = 31 * hashCodeCache + (card as Object).hashCode()
+                hashCodeCache = 31 * hashCodeCache + card.hashCode()
             }
             hashCodeReady = true
         }
