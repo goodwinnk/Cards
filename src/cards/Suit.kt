@@ -6,14 +6,11 @@ public enum class Suit(public val index : Int) {
     Diamonds : Suit(2)
     Hearts : Suit(3)
 
-    public fun toString() : String {
+    public fun toString() : String =
         when (this) {
-            Spades -> return "♠"
-            Clubs -> return "♣"
-            Diamonds -> return "♦"
-            Hearts -> return "♥"
+            Spades -> "♠"
+            Clubs -> "♣"
+            Diamonds -> "♦"
+            Hearts -> "♥"
         }
-
-        throw IllegalStateException("Invalid suit")
-    }
 }

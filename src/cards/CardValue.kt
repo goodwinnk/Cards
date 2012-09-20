@@ -10,18 +10,15 @@ public enum class CardValue(val number : Int) {
     King : CardValue(6)
     Ace : CardValue(7)
 
-    public fun toString() : String {
+    public fun toString() : String =
         when (this) {
-            Seven -> return "7"
-            Eight -> return "8"
-            Nine -> return "9"
-            Ten -> return "10"
-            Jack -> return "J"
-            Queen ->return "Q"
-            King -> return "K"
-            Ace -> return "A"
+            Seven -> "7"
+            Eight -> "8"
+            Nine -> "9"
+            Ten -> "10"
+            Jack -> "J"
+            Queen -> "Q"
+            King -> "K"
+            Ace -> "A"
         }
-
-        throw IllegalStateException("Unknown card value")
-    }
 }
